@@ -2,6 +2,8 @@ clear;
 
 InitBreach;
 
+
+%% Configurable parameters
 k=0.1;
 c=8;
 
@@ -13,21 +15,22 @@ X0_5 = -69.2;
 
 
 % mass of each train
-M_1 = 800;
-M_2 = 800;
-M_3 = 800;
-M_4 = 800;
-M_5 = 800;
+M_1 = 1000;
+M_2 = 1000;
+M_3 = 1000;
+M_4 = 1000;
+M_5 = 1000;
 
 num_train = 5;
 fixedM = true;
 
 cpt = 10;
-Mrange = [800 1200];
-Urange = [-2 2];
-%X0basis = [8.5 3]; %compute x0
+Mrange = [1000 1200];
+Urange = [-1 1];
 
-max_trials = 1;
+%%
+
+max_trials = 10;
 
 addpath model/
 addpath spec/
@@ -52,12 +55,6 @@ else
     end
 end
 
-%xtmp = 0 - X0basis(1);
-%for xi = 2:num_train
-%    Br.SetParam(strcat('X0_', num2str(xi)), xtmp);
-%    xtmp = 2*xtmp - X0basis(2);
-%end
-
 
 for cpi = 0:input_gen.cp-1
     u_sig = strcat('u_u', num2str(cpi));
@@ -66,13 +63,11 @@ end
 
 
 
-for i = 2:2
+for i = 1:3
     
     stlid = strcat('train', num2str(num_train), num2str(i));
     stlf = strcat('spec/', stlid, '.stl');
     STL_ReadFile(stlf);
-    %phi = STL_Formula('phi1','alw_[0,50](Z_1[t] > Z_2[t] and Z_2[t] > Z_3[t] and Z_3[t] > Z_4[t] and Z_4[t] > Z_5[t] and Z_5[t] > Z_6[t]) and Z_6[t] > Z_7[t] and Z_7[t] > Z_8[t]');
-
     
 
     succ = [];
@@ -97,7 +92,6 @@ for i = 2:2
         if falsif_pb.obj_best < 0
            succ = [succ; 1];
            counts = [counts; c];
-           %obj_best = [obj_best; falsif_pb.obj_best];
            num_sim = [num_sim; sims];
            total_time = [total_time; time];
            break;
@@ -106,7 +100,6 @@ for i = 2:2
         if cnt == max_trials
             succ = [succ; 0];
             counts = [counts; -1];
-            %obj_best
             num_sim = [num_sim; sims];
             total_time = [total_time; time];
             break;
