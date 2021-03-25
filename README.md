@@ -4,11 +4,11 @@ This is a repository for the project String Stability Assurance
 
 ## Install
 - Install [Breach](https://github.com/decyphir/breach). (Ver. 1.2.13 is recommended.)
-  - Run `git reset --hard 89d1f74`
-  - Run InstallBreach.m
-  - Change the random seed in Line 326 of `Core/Algos/@BreachProblem/BreachProblem.m`
+  - `git clone https://github.com/decyphir/breach.git`
+  - (Optional) Navigate to `breach/`, and run `git reset --hard 89d1f74`
+  - Run `InstallBreach.m`
 - Clone this repository.
-   `git clone https://github.com/choshina/PlatoonFalsification.git`
+  - `git clone https://github.com/choshina/PlatoonFalsification.git`
    
 ## Usage
 - Configure `phi_Train.m`
