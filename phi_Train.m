@@ -5,12 +5,26 @@ InitBreach;
 k=0.1;
 c=8;
 
+% initial position of each train, X0_1 = 0;
+X0_2 = -10;
+X0_3 = -25;
+X0_4 = -44.8;
+X0_5 = -69.2;
+
+
+% mass of each train
+M_1 = 800;
+M_2 = 800;
+M_3 = 800;
+M_4 = 800;
+M_5 = 800;
+
 num_train = 5;
 fixedM = true;
 
 cpt = 10;
 Mrange = [800 1200];
-Urange = [-80 80];
+Urange = [-2 2];
 %X0basis = [8.5 3]; %compute x0
 
 max_trials = 1;
@@ -67,11 +81,11 @@ for i = 2:2
     total_time = [];
     counts = [];
     
-    c = 0;
+    cnt = 0;
     time = 0;
     sims = 0;
     while true
-        c = c + 1;
+        cnt = cnt + 1;
         
         falsif_pb = FalsificationProblem(Br, eval(strcat('tr', num2str(num_train), num2str(i))));
         falsif_pb.max_time = 200;
@@ -89,7 +103,7 @@ for i = 2:2
            break;
         end
         
-        if c == max_trials
+        if cnt == max_trials
             succ = [succ; 0];
             counts = [counts; -1];
             %obj_best
