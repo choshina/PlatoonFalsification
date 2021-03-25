@@ -90,6 +90,7 @@ for i = 1:3
         falsif_pb = FalsificationProblem(Br, eval(strcat('tr', num2str(num_train), num2str(i))));
         falsif_pb.max_time = 200;
         falsif_pb.setup_solver('cmaes');
+        falsif_pb.solver_options.Seed = round(rem(now,1)*1000000);
         falsif_pb.solve();
 
         time = time + falsif_pb.time_spent;
