@@ -1,5 +1,6 @@
 clear;
 
+%addpath(genpath(...)) %the path of Breach
 InitBreach;
 
 
