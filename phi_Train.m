@@ -8,27 +8,31 @@ k=0.1;
 c=8;
 
 % initial position of each train, X0_1 = 0;
+% the number of X0 should be consistent with num_train
 X0_2 = -10;
 X0_3 = -25;
 X0_4 = -44.8;
 X0_5 = -69.2;
 
 
-% mass of each train
+% mass of each train. 
+% the number of M should be consistent with num_train
 M_1 = 1000;
 M_2 = 1000;
 M_3 = 1000;
 M_4 = 1000;
 M_5 = 1000;
 
-num_train = 5;
-fixedM = true;
 
-cpt = 10;
-Mrange = [1000 1200];
-Urange = [-1 1];
+num_train = 5; % one out of [5, 10, 15, 20]
+fixedM = true; % if true, M is fixed; otherwise M is within a range
+
+
+Mrange = [1000 1200]; % the range of M
+Urange = [-1 1]; % the range of U for lead train
 
 %%
+cpt = 10;
 
 max_trials = 10;
 
