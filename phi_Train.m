@@ -9,8 +9,11 @@ num_train = 5;
 fixedM = true;
 
 cpt = 10;
-Mrange = [80 120];
-Urange = [-20 20];
+Mrange = [800 1200];
+Urange = [-80 80];
+%X0basis = [8.5 3]; %compute x0
+
+max_trials = 1;
 
 addpath model/
 addpath spec/
@@ -18,7 +21,7 @@ addpath spec/
 mdl = strcat('Train', num2str(num_train));
 Br = BreachSimulinkSystem(mdl);
 
-Br.Sys.tspan = 0:.01: 50;
+Br.Sys.tspan = 0:.01:50;
 
 input_gen.type = 'UniStep';
 input_gen.cp = cpt;
@@ -35,6 +38,12 @@ else
     end
 end
 
+%xtmp = 0 - X0basis(1);
+%for xi = 2:num_train
+%    Br.SetParam(strcat('X0_', num2str(xi)), xtmp);
+%    xtmp = 2*xtmp - X0basis(2);
+%end
+
 
 for cpi = 0:input_gen.cp-1
     u_sig = strcat('u_u', num2str(cpi));
@@ -43,13 +52,14 @@ end
 
 
 
-for i = 1:3
+for i = 2:2
     
-    stlf = strcat('spec/', num2str(num_train), num2str(i));
-    phi = STL_ReadFile(stlf);
+    stlid = strcat('train', num2str(num_train), num2str(i));
+    stlf = strcat('spec/', stlid, '.stl');
+    STL_ReadFile(stlf);
     %phi = STL_Formula('phi1','alw_[0,50](Z_1[t] > Z_2[t] and Z_2[t] > Z_3[t] and Z_3[t] > Z_4[t] and Z_4[t] > Z_5[t] and Z_5[t] > Z_6[t]) and Z_6[t] > Z_7[t] and Z_7[t] > Z_8[t]');
 
-    max_trials = 10;
+    
 
     succ = [];
     obj_best = [];
@@ -63,7 +73,7 @@ for i = 1:3
     while true
         c = c + 1;
         
-        falsif_pb = FalsificationProblem(Br, phi);
+        falsif_pb = FalsificationProblem(Br, eval(strcat('tr', num2str(num_train), num2str(i))));
         falsif_pb.max_time = 200;
         falsif_pb.setup_solver('cmaes');
         falsif_pb.solve();
@@ -89,7 +99,7 @@ for i = 1:3
         end
     end
     res = table(succ, counts, num_sim, total_time);
-    filename =  strcat('results/', mdl, '_', stlf, '_', fixed(fixedM), '_', to_str(Mrange), '_', to_str(Urange), '_', num2str(cpt), '.csv');
+    filename =  strcat('results/', mdl, '_', stlid, '_', fixed(fixedM), '_', to_str(Mrange), '_', to_str(Urange), '_',  num2str(cpt), '.csv');
     writetable(res, filename,'Delimiter',';');
 end
 
