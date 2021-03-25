@@ -1,0 +1,3 @@
+stable5 := Z_1[t] > Z_2[t] and Z_2[t] > Z_3[t]
+
+tr52 := alw_[0,50](stable5)

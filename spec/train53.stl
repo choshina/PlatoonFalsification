@@ -1,0 +1,3 @@
+stable5 := Z_1[t] > Z_2[t] and Z_2[t] > Z_3[t]
+
+tr53 := alw_[0,50](not(stable5) => ev_[0, 5](stable5))
