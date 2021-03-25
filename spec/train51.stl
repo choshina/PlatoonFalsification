@@ -1,0 +1,1 @@
+tr51:= alw_[0,50](D_1[t] < 7 and D_2[t] < 7 and D_3[t] < 7 and D_4[t]< 7)
