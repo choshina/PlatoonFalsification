@@ -1,0 +1,1 @@
+tr101:= alw_[0,50](D_1[t] < 7 and D_2[t] < 7 and D_3[t] < 7 and D_4[t]< 7 and D_4[t]< 7 and D_5[t] < 7 and D_6[t]< 7 and D_7[t]< 7 and D_8[t]< 7 and D_9[t]< 7)

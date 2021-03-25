@@ -1,0 +1,3 @@
+param maxDist = 7
+
+tr151:= alw_[0,50](D_1[t] < maxDist and D_2[t] < maxDist and D_3[t] < maxDist and D_4[t]< maxDist and D_4[t]< maxDist and D_5[t] < maxDist and D_6[t]< maxDist and D_7[t]< maxDist and D_8[t]< maxDist and D_9[t]< maxDist and D_10[t] < maxDist and D_11[t]< maxDist and D_12[t] < maxDist and D_13[t] < maxDist and D_14[t] < maxDist)
